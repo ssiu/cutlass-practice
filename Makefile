@@ -1,3 +1,4 @@
+CUTLASS_DIR = cutlass
 NVCC := $(shell which nvcc 2>/dev/null)
 
 ifeq ($(NVCC),)
@@ -17,4 +18,4 @@ NVCC_FLAGS += --generate-code arch=compute_$(GPU_COMPUTE_CAPABILITY),code=[compu
 all: transpose.o
 
 transpose.o: transpose/run_transpose.cu
-	$(NVCC) $(NVCC_FLAGS) -o $@ $<
+	$(NVCC) $(NVCC_FLAGS) -o $@ $< -I${CUTLASS_DIR}/include
